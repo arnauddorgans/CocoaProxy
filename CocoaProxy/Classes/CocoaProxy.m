@@ -7,15 +7,21 @@
 
 #import "CocoaProxy.h"
 
+@interface CocoaProxy () { }
+
+@property (nonatomic, strong) NSPointerArray *pointerArray;
+
+@end
+
 @implementation CocoaProxy
 
-- (instancetype _Nonnull)init:(nonnull NSArray<NSObject*>*)proxies {
-    [self.proxies addObjectsFromArray: proxies];
+- (instancetype _Nonnull)initWithProxies:(nonnull NSArray<NSObject*>*)proxies {
+    [self setProxies: proxies];
     return self;
 }
 
 - (instancetype _Nonnull)init {
-    return [self init: @[]];
+    return [self initWithProxies: @[]];
 }
 
 - (BOOL)respondsToSelector:(SEL)aSelector
@@ -25,7 +31,7 @@
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector
 {
-    for (NSObject* proxy in self.proxies) {
+    for (NSObject* proxy in [self proxiesForSelector: aSelector]) {
         if ([proxy respondsToSelector: aSelector]) {
             return [proxy methodSignatureForSelector: aSelector];
         }
@@ -58,6 +64,17 @@
         return YES;
     }
     return NO;
+}
+
+- (void)setProxies:(NSArray<NSObject *> *)proxies {
+    self.pointerArray = [NSPointerArray weakObjectsPointerArray];
+    for (NSObject* proxy in proxies) {
+        [self.pointerArray addPointer: (void *)proxy];
+    }
+}
+
+- (NSArray<NSObject *> *)proxies {
+    return self.pointerArray.allObjects;
 }
 
 @end
