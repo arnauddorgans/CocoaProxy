@@ -1,0 +1,16 @@
+PODS:
+  - CocoaProxy (0.1.0)
+
+DEPENDENCIES:
+  - CocoaProxy (from `../`)
+
+EXTERNAL SOURCES:
+  CocoaProxy:
+    :path: ../
+
+SPEC CHECKSUMS:
+  CocoaProxy: 6415a9aa5a2f87b503ed2a7df69e606e3274cb5c
+
+PODFILE CHECKSUM: 933d37692a516e4f188987ad385304e1ab1f841b
+
+COCOAPODS: 1.4.0.beta.2
