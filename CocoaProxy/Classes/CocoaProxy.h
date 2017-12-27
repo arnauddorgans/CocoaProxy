@@ -10,11 +10,11 @@
 @interface CocoaProxy : NSProxy
 
 - (instancetype _Nonnull)init;
-- (instancetype _Nonnull)initWithProxies:(nonnull NSArray<NSObject*>*)proxies;
+- (instancetype _Nonnull)initWithProxies:(nonnull NSArray<id<NSObject>>*)proxies;
 
-- (NSArray<NSObject *> *_Nonnull)proxiesForSelector:(SEL _Nonnull )aSelector;
+- (NSArray<id<NSObject>> *_Nonnull)proxiesForSelector:(SEL _Nonnull )aSelector;
 
-@property (nonatomic, strong) NSArray<NSObject *>* _Nonnull proxies;
-@property (nonatomic, copy) BOOL (^ _Nullable proxyFilter)(NSObject * _Nonnull proxy, SEL _Nonnull selector);
+@property (nonatomic, strong) NSArray<id<NSObject>>* _Nonnull proxies;
+@property (nonatomic, copy) BOOL (^ _Nullable proxyFilter)(id<NSObject> _Nonnull proxy, SEL _Nonnull selector);
 
 @end

@@ -39,7 +39,7 @@
     return nil;
 }
 
-- (NSArray<NSObject *> *_Nonnull)proxiesForSelector:(SEL _Nonnull )aSelector
+- (NSArray<id<NSObject>> *_Nonnull)proxiesForSelector:(SEL _Nonnull )aSelector
 {
     if (self.proxyFilter) {
         NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id  _Nullable evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
@@ -66,14 +66,14 @@
     return NO;
 }
 
-- (void)setProxies:(NSArray<NSObject *> *)proxies {
+- (void)setProxies:(NSArray<id<NSObject>> *)proxies {
     self.pointerArray = [NSPointerArray weakObjectsPointerArray];
     for (NSObject* proxy in proxies) {
         [self.pointerArray addPointer: (void *)proxy];
     }
 }
 
-- (NSArray<NSObject *> *)proxies {
+- (NSArray<id<NSObject>> *)proxies {
     return self.pointerArray.allObjects;
 }
 
